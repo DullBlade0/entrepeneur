@@ -7,8 +7,10 @@ from .models import Post
 
 
 def posts_create(request):
-    if request.method == "POST":
-        print(request.POST)
+    form = PostForm(request.POST)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
     context = {
         'form': form
     }
